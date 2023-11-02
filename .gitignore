@@ -2,3 +2,6 @@
 .vscode
 /vendor
 composer.lock
+errors.log
+config.php
+logs.txt
