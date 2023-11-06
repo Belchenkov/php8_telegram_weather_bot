@@ -1,0 +1,1 @@
+https://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&appid=7850e317e51f509c874f5b91f8d4404f&q=Madridhttps://api.openweathermap.org/data/2.5/weather?units=metric&lang=ru&appid=7850e317e51f509c874f5b91f8d4404f&q=Madrid

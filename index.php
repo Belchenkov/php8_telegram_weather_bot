@@ -45,7 +45,16 @@ if (!empty($text)) {
     $weather_url .= "&q={$text}";
     $weather = send_request($weather_url);
 
-    debug($weather_url);
+    debug($weather);
+} elseif (isset($update['message']['location'])) {
+    $telegram->sendMessage([
+        'chat_id' => $chat_id,
+        'text' => "Запрашиваю данные...",
+    ]);
+
+    $weather_url .= "&lat={$update['message']['location']['latitude']}&lon={$update['message']['location']['longitude']}";
+    $weather = send_request($weather_url);
+
     debug($weather);
 } else {
     $telegram->sendMessage([
