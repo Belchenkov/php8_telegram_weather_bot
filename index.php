@@ -63,4 +63,33 @@ if (!empty($text)) {
     ]);
 }
 
+if (isset($weather)) {
+    switch ($weather->cod) {
+        case 200:
+            // https://openweathermap.org/weather-conditions#Icon-list
+            $temp = round($weather->main->temp);
+            $answer = "<u>Информация о погоде:</u>\nГород: <b>{$weather->name}</b>\nСтрана: <b>{$weather->sys->country}</b>\nПогода: <b>{$weather->weather[0]->description}</b>\nТемпература: <b>{$temp}℃</b>";
+            $telegram->sendPhoto([
+                'chat_id' => $chat_id,
+                'photo' => \Telegram\Bot\FileUpload\InputFile::create(DIR . "/img/{$weather->weather[0]->icon}.png"),
+                'caption' => $answer,
+                'parse_mode' => 'HTML',
+            ]);
+            break;
+        case 400:
+            $telegram->sendMessage([
+                'chat_id' => $chat_id,
+                'text' => "Укажите корректный формат локации",
+            ]);
+            break;
+        default:
+            debug($weather);
+            $telegram->sendMessage([
+                'chat_id' => $chat_id,
+                'text' => "Возникла ошибка. Попробуйте позже",
+            ]);
+            break;
+    }
+}
+
 
